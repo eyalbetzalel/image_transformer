@@ -116,8 +116,6 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print('Using device:', device)
     print()
-    print('Num Of GPUs:', torch.cuda.device_count())
-    print()
     if device.type == 'cuda':
         print(torch.cuda.get_device_name(0))
         print('Memory Usage:')
