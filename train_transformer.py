@@ -115,8 +115,10 @@ def main():
         ])
 
     path = r"/home/dsi/eyalbetzalel/glow/GLOW/GLOW/imagenet64/"
+    print("Load ImageNet (long)")
     dataset = datasets.ImageFolder(path, transform=transform)
     loader = DataLoader(dataset, batch_size=config.train.batch_size, shuffle=True, num_workers=4)
+    print("Finished load ImageNet")
     # dataset = datasets.CIFAR10('datasets/transformer', transform=transform, download=True)     ## CIFAR10
     input_dim = config.model.image_size ** 2 * config.model.channels
     model = ImageTransformer(config.model).to(config.device)
