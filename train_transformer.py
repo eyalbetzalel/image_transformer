@@ -131,6 +131,17 @@ def main():
     model = ImageTransformer(config.model).to(config.device)
     optimizer = optim.Adam(model.parameters(), lr=1., betas=(0.9, 0.98), eps=1e-9)
     scheduler = optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lambda step: get_lr(step, config))
+    print('loading model')
+    checkpoint = torch.load(r"/home/dsi/eyalbetzalel/image_transformer/image_transformer/transformer_logs/0/model.pth")
+    model.load_state_dict(checkpoint['model_state_dict'])
+    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+    epoch = checkpoint['epoch']
+    loss = checkpoint['loss']
+
+    print('epoch:',epoch)
+    print('loss:', loss)
+
+
 
     # Initialize as in their code
     gain = config.model.initializer_gain
