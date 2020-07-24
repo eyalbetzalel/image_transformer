@@ -14,7 +14,7 @@ optim:
 
 model:
   # Using cifar10_base hparams -- ideally gets 2.90 bits/dim
-  image_size: 32
+  image_size: 64
   channels: 3
   hidden_size: 256
   nlayers: 14

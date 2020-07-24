@@ -113,8 +113,11 @@ def main():
             transforms.Resize(config.model.image_size),
             transforms.ToTensor()
         ])
-    dataset = datasets.CIFAR10('datasets/transformer', transform=transform, download=True)
+
+    path = r"/home/dsi/eyalbetzalel/glow/GLOW/GLOW/imagenet64/"
+    dataset = datasets.ImageFolder(path, transform=transform)
     loader = DataLoader(dataset, batch_size=config.train.batch_size, shuffle=True, num_workers=4)
+    # dataset = datasets.CIFAR10('datasets/transformer', transform=transform, download=True)     ## CIFAR10
     input_dim = config.model.image_size ** 2 * config.model.channels
     model = ImageTransformer(config.model).to(config.device)
     optimizer = optim.Adam(model.parameters(), lr=1., betas=(0.9, 0.98), eps=1e-9)
