@@ -224,41 +224,41 @@ def main():
 
             if step % config.train.sample_iter == 0:
                 logging.info("Sampling from model: {}".format(args.doc))
-                if config.model.distr == "cat":
-                    channels = ['r','g','b']
-                    color_codes = ['Reds', "Greens", 'Blues']
-                    for idx, c in enumerate(channels):
-                        ax = sns.heatmap(losses_per_dim[idx,:,:].cpu().numpy(), linewidth=0.5, cmap=color_codes[idx])
-                        tb_logger.add_figure("losses_per_dim/{}".format(c), ax.get_figure(), close=True, global_step=step)
-                else:
-                    ax = sns.heatmap(losses_per_dim[0,:,:].cpu().numpy(), linewidth=0.5, cmap='Blues')
-                    tb_logger.add_figure("losses_per_dim", ax.get_figure(), close=True, global_step=step)
+#                if config.model.distr == "cat":
+#                    channels = ['r','g','b']
+#                    color_codes = ['Reds', "Greens", 'Blues']
+#                    for idx, c in enumerate(channels):
+#                        ax = sns.heatmap(losses_per_dim[idx,:,:].cpu().numpy(), linewidth=0.5, cmap=color_codes[idx])
+#                        tb_logger.add_figure("losses_per_dim/{}".format(c), ax.get_figure(), close=True, global_step=step)
+#                else:
+#                    ax = sns.heatmap(losses_per_dim[0,:,:].cpu().numpy(), linewidth=0.5, cmap='Blues')
+#                    tb_logger.add_figure("losses_per_dim", ax.get_figure(), close=True, global_step=step)
 
-                model.eval()
-                with torch.no_grad():
-                    imgs = revert_samples(imgs)
-                    imgs_grid = torchvision.utils.make_grid(imgs[:8, ...], 3)
-                    tb_logger.add_image('imgs', imgs_grid, global_step=step)
+#                model.eval()
+#                with torch.no_grad():
+#                    imgs = revert_samples(imgs)
+#                    imgs_grid = torchvision.utils.make_grid(imgs[:8, ...], 3)
+#                    tb_logger.add_image('imgs', imgs_grid, global_step=step)
 
-                    # Evaluate model predictions for the input
-                    pred_samples = revert_samples(model.sample_from_preds(preds))
-                    pred_samples_grid = torchvision.utils.make_grid(pred_samples[:8, ...], 3)
-                    tb_logger.add_image('pred_samples/random', pred_samples_grid, global_step=step)
-                    pred_samples = revert_samples(model.sample_from_preds(preds, argmax=True))
-                    pred_samples_grid = torchvision.utils.make_grid(pred_samples[:8, ...], 3)
-                    tb_logger.add_image('pred_samples/argmax', pred_samples_grid, global_step=step)
+#                    # Evaluate model predictions for the input
+#                    pred_samples = revert_samples(model.sample_from_preds(preds))
+#                    pred_samples_grid = torchvision.utils.make_grid(pred_samples[:8, ...], 3)
+#                    tb_logger.add_image('pred_samples/random', pred_samples_grid, global_step=step)
+#                    pred_samples = revert_samples(model.sample_from_preds(preds, argmax=True))
+#                    pred_samples_grid = torchvision.utils.make_grid(pred_samples[:8, ...], 3)
+#                    tb_logger.add_image('pred_samples/argmax', pred_samples_grid, global_step=step)
 
-                    if args.sample:
-                        samples = revert_samples(model.sample(config.train.sample_size, config.device))
-                        samples_grid = torchvision.utils.make_grid(samples[:8, ...], 3)
-                        tb_logger.add_image('samples', samples_grid, global_step=step)
+#                    if args.sample:
+#                        samples = revert_samples(model.sample(config.train.sample_size, config.device))
+#                        samples_grid = torchvision.utils.make_grid(samples[:8, ...], 3)
+#                        tb_logger.add_image('samples', samples_grid, global_step=step)
 
                     # Argmax samples are not useful for unconditional generation
                     # if config.model.distr == "cat":
                     #     argmax_samples = model.sample(1, config.device, argmax=True)
                     #     samples_grid = torchvision.utils.make_grid(argmax_samples[:8, ...], 3)
                     #     tb_logger.add_image('argmax_samples', samples_grid, global_step=step)
-                torch.save(model.state_dict(), os.path.join('transformer_logs', args.doc, "model.pth"))
+               torch.save(model.state_dict(), os.path.join('transformer_logs', args.doc, "model.pth"))
             step += 1
 
     return 0
