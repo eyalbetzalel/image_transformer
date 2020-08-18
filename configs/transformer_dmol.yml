@@ -2,7 +2,7 @@ seed: 1234
 
 train:
   epochs: 100
-  batch_size: 16
+  batch_size: 8
   sample_iter: 1000
   sample_size: 32
   log_iter: 1
