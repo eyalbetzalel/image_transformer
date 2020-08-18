@@ -258,7 +258,7 @@ def main():
                     #     argmax_samples = model.sample(1, config.device, argmax=True)
                     #     samples_grid = torchvision.utils.make_grid(argmax_samples[:8, ...], 3)
                     #     tb_logger.add_image('argmax_samples', samples_grid, global_step=step)
-               torch.save(model.state_dict(), os.path.join('transformer_logs', args.doc, "model.pth"))
+                torch.save(model.state_dict(), os.path.join('transformer_logs', args.doc, "model.pth"))
             step += 1
 
     return 0
