@@ -121,7 +121,7 @@ def main():
         print('Memory Usage:')
         print('Allocated:', round(torch.cuda.memory_allocated(0) / 1024 ** 3, 1), 'GB')
         print('Cached:   ', round(torch.cuda.memory_cached(0) / 1024 ** 3, 1), 'GB')
-    path = r"/home/dsi/eyalbetzalel/glow/GLOW/GLOW/imagenet64/"
+    path = r"//home/dsi/eyalbetzalel/image_transformer/image_transformer/imagenet64"
     print("Load ImageNet (long)")
     dataset = datasets.ImageFolder(path, transform=transform)
     loader = DataLoader(dataset, batch_size=config.train.batch_size, shuffle=True, num_workers=4)
