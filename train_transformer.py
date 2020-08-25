@@ -121,8 +121,8 @@ def main():
         print('Memory Usage:')
         print('Allocated:', round(torch.cuda.memory_allocated(0) / 1024 ** 3, 1), 'GB')
         print('Cached:   ', round(torch.cuda.memory_cached(0) / 1024 ** 3, 1), 'GB')
-    path = r"//home/dsi/eyalbetzalel/image_transformer/image_transformer/imagenet64"
-    print("Load ImageNet (long)")
+    path = r"/home/dsi/eyalbetzalel/image_transformer/image_transformer/cifar_horses"
+    print("Load Conditional Cifar (long)")
     dataset = datasets.ImageFolder(path, transform=transform)
     loader = DataLoader(dataset, batch_size=config.train.batch_size, shuffle=True, num_workers=4)
     print("Finished load ImageNet")
