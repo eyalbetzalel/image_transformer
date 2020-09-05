@@ -1,7 +1,7 @@
 seed: 1234
 
 train:
-  epochs: 100
+  epochs: 50000
   batch_size: 8
   sample_iter: 1000
   sample_size: 8
@@ -9,7 +9,7 @@ train:
   clip_grad_norm: 0
 
 optim:
-  lr: 0.1
+  lr: 0.01
   warmup: 4000
 
 model:
